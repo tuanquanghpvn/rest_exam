@@ -1,5 +1,5 @@
 from django.db import models
-from apps.categories.models import Category
+from apps.category.models import Category
 
 
 class Story(models.Model):
