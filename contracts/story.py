@@ -25,6 +25,8 @@ class Story(object):
         self.content = content
 
 
+# Request
+
 class PostStoryRequest(Story):
     def __init__(self,
                  id_category: Optional[int] = None,
@@ -51,3 +53,6 @@ class PutStoryRequest(Story):
 class DeleteStoryRequest(Story):
     def __init__(self, id: Optional[int] = None):
         super().__init__(id=id)
+
+
+# Response

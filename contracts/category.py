@@ -16,6 +16,8 @@ class Category(object):
         self.slug = slug
 
 
+# Request
+
 class PostCategoryRequest(Category):
     def __init__(self,
                  name: Optional[str] = None,
@@ -23,7 +25,7 @@ class PostCategoryRequest(Category):
         super().__init__(name=name, slug=slug)
 
 
-class PusCategoryRequest(Category):
+class PutCategoryRequest(Category):
     def __init__(self,
                  id: Optional[int] = None,
                  name: Optional[str] = None,
@@ -35,3 +37,5 @@ class DeleteCategoryRequest(Category):
     def __init__(self,
                  id: Optional[int] = None):
         super().__init__(id)
+
+# Response
