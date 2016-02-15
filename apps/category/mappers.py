@@ -1,5 +1,5 @@
 from marshmallow import (Schema, fields, post_load, validates_schema, ValidationError)
-from contracts.category import (PostCategoryRequest, PusCategoryRequest, DeleteCategoryRequest)
+from contracts.category import (PostCategoryRequest, PutCategoryRequest, DeleteCategoryRequest)
 from contracts.category import (ID, NAME, SLUG)
 
 
@@ -26,7 +26,7 @@ def _check_include_fields(data, require_key, include_key):
         raise ValidationError(error_msgs)
 
 
-# Request schema
+# Request
 
 class CategorySchema(Schema):
     id = fields.Int()
@@ -49,7 +49,7 @@ class PostCategoryRequestSchema(CategorySchema):
 class PutCategoryRequestSchema(CategorySchema):
     @post_load
     def make_contract(self, data):
-        return PusCategoryRequest(**data)
+        return PutCategoryRequest(**data)
 
     @validates_schema
     def check_require_include_fields(self, data):
@@ -69,4 +69,4 @@ class DeleteCategorySchema(CategorySchema):
         include_key = []
         _check_include_fields(data, require_key, include_key)
 
-# Response schema
+# Response
