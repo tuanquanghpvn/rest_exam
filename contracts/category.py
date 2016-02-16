@@ -53,9 +53,10 @@ class DeleteCategoryRequest(Category):
 class GetCategoryResponse(PagingResponse):
     def __init__(self,
                  request: PagingRequest,
-                 path: str,
-                 category_list: list):
-        super().__init__(request_obj=request, path=path, count=len(category_list))
+                 response: list,
+                 path: str):
+        super().__init__(request_obj=request, path=path, count=len(response))
+        self.results = response
 
 
 class PostCategoryResponse(Category):
