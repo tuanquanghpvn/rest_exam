@@ -1,29 +1,7 @@
-from marshmallow import (Schema, fields, post_load, validates_schema, ValidationError)
+from marshmallow import (Schema, fields, post_load, validates_schema)
 from contracts.category import (PostCategoryRequest, PutCategoryRequest, DeleteCategoryRequest)
-from contracts.category import (ID, NAME, SLUG)
-
-
-def _check_include_fields(data, require_key, include_key):
-    """Check loading field values.
-
-    It's required or can be included in result.
-    If it is invalid, raise error.
-    This method should use in @validates_schema.
-
-    :param dict data: input data
-    :param list<str> require_key: Required key names
-    :param list<str> include_key: Key names to include result
-    :return:
-    """
-    error_msgs = []
-    for key in require_key:
-        if key not in data:
-            error_msgs.append('Require field name {}'.format(key))
-    for key in data:
-        if key not in include_key:
-            error_msgs.append('Invalid field name {}'.format(key))
-    if len(error_msgs) > 0:
-        raise ValidationError(error_msgs)
+from contracts.category import (CATEGORY_ID, NAME, SLUG)
+from apps.base.mappers import _check_include_fields
 
 
 # Request
@@ -42,7 +20,7 @@ class PostCategoryRequestSchema(CategorySchema):
     @validates_schema
     def check_require_include_fields(self, data):
         require_key = [NAME, SLUG]
-        include_key = []
+        include_key = [NAME, SLUG]
         _check_include_fields(data, require_key, include_key)
 
 
@@ -53,20 +31,32 @@ class PutCategoryRequestSchema(CategorySchema):
 
     @validates_schema
     def check_require_include_fields(self, data):
-        require_key = [ID]
-        include_key = [ID, NAME, SLUG]
+        require_key = [CATEGORY_ID]
+        include_key = [CATEGORY_ID, NAME, SLUG]
         _check_include_fields(data, require_key, include_key)
 
 
-class DeleteCategorySchema(CategorySchema):
+class DeleteCategoryRequestSchema(CategorySchema):
     @post_load
     def make_contract(self, data):
         return DeleteCategoryRequest(**data)
 
     @validates_schema
     def check_require_include_fields(self, data):
-        require_key = [ID]
+        require_key = [CATEGORY_ID]
         include_key = []
         _check_include_fields(data, require_key, include_key)
 
+
 # Response
+
+class PostCategoryResponseSchema(CategorySchema):
+    pass
+
+
+class PutCategoryResponseSchema(CategorySchema):
+    pass
+
+
+class DeleteCategoryResponseSchema(CategorySchema):
+    pass
