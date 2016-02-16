@@ -32,7 +32,7 @@ class PagingResponse(object):
         Paging Response
     """
 
-    def __init__(self, request_obj: PagingRequest, path: str, count: int):
+    def __init__(self, request_obj: PagingRequest, path: str, count: int, total_count: int):
         """
             Set HTTP Response parameter to Response object
             :param PagingRequest request_obj: Request parameters
@@ -51,11 +51,11 @@ class PagingResponse(object):
         limit = request_obj.limit
         request_dict = dict(request_obj.__dict__)
         self.current = path + '?' + urlencode(request_dict)
-        next_offset = self._get_next_link(offset, limit, count)
+        next_offset = self._get_next_link(offset, limit, total_count)
         if next_offset:
             request_dict[OFFSET_NAME] = next_offset
             self.next = path + '?' + urlencode(request_dict)
-        prev_offset = self._get_previous_link(offset, limit, count)
+        prev_offset = self._get_previous_link(offset, limit, total_count)
         if prev_offset:
             request_dict[OFFSET_NAME] = prev_offset
             self.prev = path + '?' + urlencode(request_dict)

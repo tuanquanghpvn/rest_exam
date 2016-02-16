@@ -33,8 +33,8 @@ class CategoryView(APIView):
 
     def delete(self, request, code):
         return _base_request(request=request,
-                             request_schema=DeleteCategoryRequestSchema,
-                             response_schema=DeleteCategoryResponseSchema,
+                             request_schema=DeleteCategoryRequestSchema(),
+                             response_schema=DeleteCategoryResponseSchema(),
                              method=CategoryServiceAgent.delete_category,
                              code_name=CATEGORY_ID,
                              code=code)

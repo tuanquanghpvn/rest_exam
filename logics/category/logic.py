@@ -8,22 +8,22 @@ from .repository import CategoryRepository
 class CategoryServiceAgent(object):
     @classmethod
     def get_category(cls, request_obj: GetCategoryRequest, path: str) -> GetCategoryResponse:
-        category_list = CategoryRepository.get_category(limit=request_obj.limit,
-                                                        offset=request_obj.offset,
-                                                        sort=request_obj.sort)
-        category_dics = []
-        for category in category_list:
-            category_dics.append(category)
-        return GetCategoryResponse(request=request_obj, response=category_dics, path=path)
+        category_list, total_count = CategoryRepository.get_category(limit=request_obj.limit,
+                                                                     offset=request_obj.offset,
+                                                                     sort=request_obj.sort)
+        return GetCategoryResponse(request=request_obj, response=category_list, path=path, total_count=total_count)
 
     @classmethod
     def post_category(cls, request_obj: PostCategoryRequest) -> PostCategoryResponse:
-        pass
+        category = CategoryRepository.post_category(name=request_obj.name, slug=request_obj.slug)
+        return PostCategoryResponse(**category.__dict__)
 
     @classmethod
     def put_category(cls, request_obj: PutCategoryRequest) -> PutCategoryResponse:
-        pass
+        category = CategoryRepository.put_category(name=request_obj.name, slug=request_obj.slug)
+        return PutCategoryResponse(**category.__dict__)
 
     @classmethod
     def delete_category(cls, request_obj: DeleteCategoryRequest) -> DeleteCategoryResponse:
-        pass
+        category = CategoryRepository.delete_category(id=request_obj.id)
+        return category

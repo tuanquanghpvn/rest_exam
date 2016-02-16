@@ -60,3 +60,4 @@ def _parse_path(request):
         host=request.get_host(),
         path=request.path
     )
+
