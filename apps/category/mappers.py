@@ -51,7 +51,7 @@ class DeleteCategoryRequestSchema(CategorySchema):
     @validates_schema
     def check_require_include_fields(self, data):
         require_key = [CATEGORY_ID]
-        include_key = []
+        include_key = [CATEGORY_ID]
         _check_include_fields(data, require_key, include_key)
 
 
