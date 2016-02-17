@@ -1,4 +1,4 @@
-from rest_framework.views import APIView
+from apps.base.views import BaseView
 from contracts.category import CATEGORY_ID
 from logics.category.logic import CategoryServiceAgent
 from apps.base.views import _base_request
@@ -8,7 +8,7 @@ from apps.category.mappers import (GetCategoryRequestSchema, GetCategoryResponse
                                    DeleteCategoryRequestSchema, DeleteCategoryResponseSchema)
 
 
-class CategoryView(APIView):
+class CategorysView(BaseView):
     def get(self, request):
         return _base_request(request=request,
                              request_schema=GetCategoryRequestSchema(),
@@ -22,6 +22,11 @@ class CategoryView(APIView):
                              response_schema=PostCategoryResponseSchema(),
                              method=CategoryServiceAgent.post_category
                              )
+
+
+class CategoryView(BaseView):
+    def get(self, request, code):
+        pass
 
     def put(self, request, code):
         return _base_request(request=request,

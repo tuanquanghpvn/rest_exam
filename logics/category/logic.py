@@ -2,7 +2,6 @@ from contracts.category import (GetCategoryRequest, GetCategoryResponse,
                                 PostCategoryRequest, PostCategoryResponse,
                                 PutCategoryRequest, PutCategoryResponse,
                                 DeleteCategoryRequest, DeleteCategoryResponse)
-from contracts.exeptions import ResourceNotFoundException
 from .repository import CategoryRepository
 
 
@@ -21,12 +20,8 @@ class CategoryServiceAgent(object):
 
     @classmethod
     def put_category(cls, request_obj: PutCategoryRequest) -> PutCategoryResponse:
-        update_count = CategoryRepository.put_category(id=request_obj.id, name=request_obj.name, slug=request_obj.slug)
-        if update_count:
-            category = CategoryRepository.find_category(id=request_obj.id)
-            return PutCategoryResponse(**category.__dict__)
-        else:
-            raise ResourceNotFoundException
+        category = CategoryRepository.put_category(id=request_obj.id, name=request_obj.name, slug=request_obj.slug)
+        return PutCategoryResponse(**category.__dict__)
 
     @classmethod
     def delete_category(cls, request_obj: DeleteCategoryRequest) -> DeleteCategoryResponse:

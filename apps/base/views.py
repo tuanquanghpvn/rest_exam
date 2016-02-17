@@ -2,9 +2,14 @@ from django.http import response
 from typing import (Callable, Optional)
 from marshmallow import Schema
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from contracts.exeptions import (RequestParameterException, ResourceNotFoundException)
+
+
+class BaseView(APIView):
+    pass
 
 
 def _base_request(request: Request, request_schema: Schema, response_schema: Schema,
@@ -25,7 +30,7 @@ def _base_request(request: Request, request_schema: Schema, response_schema: Sch
         return response.HttpResponseNotFound()
     request_param = {}
     if request.query_params:
-        request_param.update(request.query_params)
+        request_param.update(request.query_params.dict())
     if request.data:
         request_param.update(request.data)
     if code and code_name:

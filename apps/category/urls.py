@@ -1,8 +1,8 @@
-from django.conf.urls import include, url
-from .views import CategoryView
+from django.conf.urls import url
+from .views import (CategorysView, CategoryView)
 
 
 urlpatterns = [
-    url(r'^$', CategoryView.as_view()),
+    url(r'^$', CategorysView.as_view()),
     url(r'^(?P<code>[0-9]+)$', CategoryView.as_view()),
 ]
