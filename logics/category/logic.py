@@ -1,4 +1,5 @@
 from contracts.category import (GetCategoryRequest, GetCategoryResponse,
+                                DetailCategoryRequest, DetailCategoryResponse,
                                 PostCategoryRequest, PostCategoryResponse,
                                 PutCategoryRequest, PutCategoryResponse,
                                 DeleteCategoryRequest, DeleteCategoryResponse)
@@ -12,6 +13,11 @@ class CategoryServiceAgent(object):
                                                                      offset=request_obj.offset,
                                                                      sort=request_obj.sort)
         return GetCategoryResponse(request=request_obj, response=category_list, path=path, total_count=total_count)
+
+    @classmethod
+    def detail_category(cls, request_obj: DetailCategoryRequest) -> DetailCategoryResponse:
+        category = CategoryRepository.detail_category(id=request_obj.id)
+        return DetailCategoryResponse(**category.__dict__)
 
     @classmethod
     def post_category(cls, request_obj: PostCategoryRequest) -> PostCategoryResponse:

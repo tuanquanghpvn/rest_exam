@@ -19,7 +19,7 @@ class CategoryRepository(object):
             raise e
 
     @classmethod
-    def find_category(cls, id: int):
+    def detail_category(cls, id: int):
         try:
             category = Category.objects.get(id=id)
             if category:

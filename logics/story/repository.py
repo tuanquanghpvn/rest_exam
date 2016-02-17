@@ -28,7 +28,7 @@ class StoryRespository(object):
             raise e
 
     @classmethod
-    def find_story(cls, id: int):
+    def detail_story(cls, id: int):
         try:
             story = Story.objects.get(id=id)
             if story:

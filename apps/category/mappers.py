@@ -1,5 +1,6 @@
 from marshmallow import (Schema, fields, post_load, validates_schema)
 from contracts.category import (GetCategoryRequest, GetCategoryResponse,
+                                DetailCategoryRequest, DetailCategoryResponse,
                                 PostCategoryRequest, PutCategoryRequest, DeleteCategoryRequest)
 from contracts.category import (CATEGORY_ID, NAME, SLUG)
 from apps.base.mappers import (PagingRequestSchema, PagingResponseSchema, _check_include_fields)
@@ -17,6 +18,18 @@ class GetCategoryRequestSchema(PagingRequestSchema):
     @post_load
     def make_contract(self, data):
         return GetCategoryRequest(**data)
+
+
+class DetailCategoryRequestSchema(CategorySchema):
+    @post_load
+    def make_contract(self, data):
+        return DetailCategoryRequest(**data)
+
+    @validates_schema
+    def check_require_include_fields(self, data):
+        require_key = [CATEGORY_ID]
+        include_key = [CATEGORY_ID]
+        _check_include_fields(data, require_key, include_key)
 
 
 class PostCategoryRequestSchema(CategorySchema):
@@ -59,6 +72,10 @@ class DeleteCategoryRequestSchema(CategorySchema):
 
 class GetCategoryResponseSchema(PagingResponseSchema):
     results = fields.Nested(CategorySchema, many=True)
+
+
+class DetailCategoryResponseSchema(CategorySchema):
+    pass
 
 
 class PostCategoryResponseSchema(CategorySchema):

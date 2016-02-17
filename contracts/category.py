@@ -21,6 +21,11 @@ class GetCategoryRequest(PagingRequest):
         super().__init__(limit=limit, offset=offset, sort=sort)
 
 
+class DetailCategoryRequest(Category):
+    def __init__(self, id: Optional[int] = None):
+        super().__init__(id=id)
+
+
 class PostCategoryRequest(Category):
     def __init__(self, name: Optional[str] = None, slug: Optional[str] = None):
         super().__init__(name=name, slug=slug)
@@ -42,6 +47,11 @@ class GetCategoryResponse(PagingResponse):
     def __init__(self, request: PagingRequest, response: list, path: str, total_count: int):
         super().__init__(request_obj=request, path=path, count=len(response), total_count=total_count)
         self.results = response
+
+
+class DetailCategoryResponse(Category):
+    def __init__(self, id: int, name: str, slug: str, **kwargs):
+        super().__init__(id=id, name=name, slug=slug)
 
 
 class PostCategoryResponse(Category):

@@ -3,6 +3,7 @@ from contracts.story import STORY_ID
 from apps.base.views import _base_request
 from logics.story.logic import StoryServiceAgent
 from apps.story.mappers import (GetStoryRequestSchema, GetStoryResponseSchema,
+                                DetailStoryRequestSchema, DetailStoryResponseSchema,
                                 PostStoryRequestSchema, PostStoryResponseSchema,
                                 PutStoryRequestSchema, PutStoryResponseSchema,
                                 DeleteStoryRequestSchema, DeleteStoryResponseSchema)
@@ -25,7 +26,12 @@ class StorysView(BaseView):
 
 class StoryView(BaseView):
     def get(self, request, code):
-        pass
+        return _base_request(request=request,
+                             request_schema=DetailStoryRequestSchema(),
+                             response_schema=DetailStoryResponseSchema(),
+                             method=StoryServiceAgent.detail_story,
+                             code=code,
+                             code_name=STORY_ID)
 
     def put(self, request, code):
         return _base_request(request=request,

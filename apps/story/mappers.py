@@ -1,5 +1,7 @@
 from marshmallow import (Schema, fields, post_load, validates_schema)
-from contracts.story import (GetStoryRequest, GetStoryResponse, PostStoryRequest, PutStoryRequest, DeleteStoryRequest,
+from contracts.story import (GetStoryRequest, GetStoryResponse,
+                             DetailStoryRequest, DetailStoryResponse,
+                             PostStoryRequest, PutStoryRequest, DeleteStoryRequest,
                              STORY_ID, CATEGORY_ID, NAME, SLUG, DESCRIPTION, CONTENT)
 from apps.base.mappers import (_check_include_fields, PagingRequestSchema, PagingResponseSchema)
 
@@ -21,6 +23,18 @@ class GetStoryRequestSchema(PagingRequestSchema):
     @post_load
     def make_contract(self, data):
         return GetStoryRequest(**data)
+
+
+class DetailStoryRequestSchema(StorySchema):
+    @post_load
+    def make_contract(self, data):
+        return DetailStoryRequest(**data)
+
+    @validates_schema
+    def check_require_include_fields(self, data):
+        require_key = [STORY_ID]
+        include_key = [STORY_ID]
+        _check_include_fields(data, require_key, include_key)
 
 
 class PostStoryRequestSchema(StorySchema):
@@ -63,6 +77,10 @@ class DeleteStoryRequestSchema(StorySchema):
 
 class GetStoryResponseSchema(PagingResponseSchema):
     results = fields.Nested(StorySchema, many=True)
+
+
+class DetailStoryResponseSchema(StorySchema):
+    pass
 
 
 class PostStoryResponseSchema(StorySchema):
