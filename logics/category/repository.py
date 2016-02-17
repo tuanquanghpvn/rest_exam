@@ -1,4 +1,5 @@
 from typing import Optional
+from contracts.exeptions import (ResourceNotFoundException)
 from apps.category.models import Category
 
 
@@ -7,26 +8,57 @@ class CategoryRepository(object):
     def get_category(cls, limit: Optional[int] = None,
                      offset: Optional[int] = None,
                      sort: Optional[str] = None) -> list:
-        if sort:
-            results = Category.objects.order_by(sort)[offset:limit]
-        else:
-            results = Category.objects.order_by("-id")[offset:limit]
-        return results, Category.objects.count()
+        try:
+            if sort:
+                results = Category.objects.order_by(sort)[offset:limit]
+            else:
+                results = Category.objects.order_by("-id")[offset:limit]
+            return results, Category.objects.count()
+        except Exception as e:
+            raise e
+
+    @classmethod
+    def find_category(cls, id: int):
+        try:
+            category = Category.objects.get(id=id)
+            if category:
+                return category
+            else:
+                raise ResourceNotFoundException
+        except Exception as e:
+            raise e
 
     @classmethod
     def post_category(cls, name: str, slug: str) -> object:
-        category = Category.objects.create(name=name, slug=slug)
-        return category
+        try:
+            category = Category.objects.create(name=name, slug=slug)
+            if category:
+                return category
+            else:
+                raise ResourceNotFoundException
+        except Exception as e:
+            raise e
 
     @classmethod
     def put_category(cls, id: int, name: str, slug: str) -> int:
-        category = Category.objects.filter(id=id).update(
-            name=name,
-            slug=slug
-        )
-        return category
+        try:
+            category = Category.objects.get(id=id)
+            if category:
+                update_count = category.update(
+                    name=name,
+                    slug=slug
+                )
+                return update_count
+            else:
+                raise ResourceNotFoundException
+        except Exception as e:
+            raise e
 
     @classmethod
     def delete_category(cls, id: int) -> int:
-        category = Category.objects.filter(id=id).delete()
-        return category
+        category = Category.objects.filter(id=id)
+        if category:
+            delete_count = category.delete()
+            return delete_count
+        else:
+            raise ResourceNotFoundException
