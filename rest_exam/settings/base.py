@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'apps.story',
 
     'rest_framework',
+    'aldjemy'
 )
 
 MIDDLEWARE_CLASSES = (

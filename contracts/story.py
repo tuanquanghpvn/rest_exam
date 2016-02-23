@@ -73,6 +73,7 @@ class DeleteStoryRequest(Story):
 class GetStoryResponse(PagingResponse):
     def __init__(self, request: PagingRequest, response: list, path: str, total_count: int):
         super().__init__(request_obj=request, path=path, count=len(response), total_count=total_count)
+        self.results = response
 
 
 class DetailStoryResponse(Story):

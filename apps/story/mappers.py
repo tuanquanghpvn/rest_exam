@@ -10,11 +10,12 @@ from apps.base.mappers import (_check_include_fields, PagingRequestSchema, Pagin
 
 class StorySchema(Schema):
     id = fields.Int()
-    category_id = fields.Int()
     name = fields.Str()
     slug = fields.Str()
     description = fields.Str(allow_none=True)
     content = fields.Str()
+    category_id = fields.Int()
+    category_name = fields.Str()
 
 
 class GetStoryRequestSchema(PagingRequestSchema):
