@@ -90,6 +90,10 @@ DATABASES = {
     }
 }
 
+# SQLAlchemyで利用するDB設定
+ALDJEMY_ENGINES = {
+    'mysql': 'mysql+mysqldb'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
