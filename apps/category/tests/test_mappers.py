@@ -37,6 +37,12 @@ TEST_CATEGORY = {
 }
 
 
+def _test_category(category, has_id=False, has_name=False, has_slug=False):
+    assert category.id == (TEST_CATEGORY_ID if has_id else None)
+    assert category.name == (TEST_CATEGORY_NAME if has_name else None)
+    assert category.slug == (TEST_CATEGORY_SLUG if has_slug else None)
+
+
 class TestPagingRequestSchema(object):
     def test_load(self):
         actual, errors = PagingRequestSchema().load(PAGING_REQUEST)
@@ -75,3 +81,28 @@ class TestPostCategorySchema(object):
         actual, errors = PostCategoryRequestSchema().load(expected)
         assert isinstance(actual, PostCategoryRequest)
         assert errors == {}
+        _test_category(category=actual, has_name=True, has_slug=True)
+
+
+class TestPutCategorySchema(object):
+    def test_load(self):
+        expected = {
+            CATEGORY_ID: TEST_CATEGORY_ID,
+            NAME: TEST_CATEGORY_NAME,
+            SLUG: TEST_CATEGORY_SLUG
+        }
+        actual, errors = PutCategoryRequestSchema().load(expected)
+        assert isinstance(actual, PutCategoryRequest)
+        assert errors == {}
+        _test_category(category=actual, has_id=True, has_name=True, has_slug=True)
+
+
+class TestDeleteCategorySchema(object):
+    def test_load(self):
+        expected = {
+            CATEGORY_ID: TEST_CATEGORY_ID,
+        }
+        actual, errors = DeleteCategoryRequestSchema().load(expected)
+        assert isinstance(actual, DeleteCategoryRequest)
+        assert errors == {}
+        _test_category(category=actual, has_id=True)
