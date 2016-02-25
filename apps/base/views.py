@@ -50,7 +50,7 @@ def _base_request(request: Request, request_schema: Schema, response_schema: Sch
         return response.HttpResponseNotFound()
     except Exception as e:
         return response.HttpResponseServerError()
-    data, _ = response_schema.dumps(response_obj)
+    data, _ = response_schema.dump(response_obj)
     if request.method == 'POST':
         return Response(data, status.HTTP_201_CREATED)
     elif request.method == 'DELETE':

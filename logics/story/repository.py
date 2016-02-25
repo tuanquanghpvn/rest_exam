@@ -1,11 +1,8 @@
 from typing import Optional
-
 from django.db import transaction
 from sqlalchemy import func
 from sqlalchemy.util import KeyedTuple
 from sqlalchemy.orm.exc import NoResultFound
-
-from contracts.exeptions import ResourceNotFoundException
 from apps.category.models import Category
 from apps.story.models import Story
 from contracts.story import (STORY_ID, NAME, SLUG, DESCRIPTION, CONTENT, CATEGORY_ID)

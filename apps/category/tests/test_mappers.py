@@ -36,6 +36,16 @@ TEST_CATEGORY = {
     SLUG: TEST_CATEGORY_SLUG
 }
 
+TEST_CATEGORY_POST = {
+    NAME: TEST_CATEGORY_NAME,
+    SLUG: TEST_CATEGORY_SLUG
+}
+
+TEST_CATEGORY_PUT = {
+    NAME: TEST_CATEGORY_NAME,
+    SLUG: TEST_CATEGORY_SLUG
+}
+
 
 def _test_category(category, has_id=False, has_name=False, has_slug=False):
     assert category.id == (TEST_CATEGORY_ID if has_id else None)
