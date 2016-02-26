@@ -3,11 +3,11 @@
 ## Technology
 * [Django](https://www.djangoproject.com/)
 * [Django Rest Framework](http://www.django-rest-framework.org/)
-* [Marshmallow](http://marshmallow.rtfd.org)
-* [SQlAlchemy](http://www.sqlalchemy.org/)
-* [Aldjemy](https://github.com/Deepwalker/aldjemy/)
-* [Pytest](http://pytest.org/latest/)
-* [Pytest-django](https://pytest-django.readthedocs.org/en/latest/)
+* [Marshmallow](http://marshmallow.rtfd.org) ( is an ORM/ODM/framework-agnostic library for converting complex datatypes, such as objects, to and from native Python datatypes)
+* [SQlAlchemy](http://www.sqlalchemy.org/) (query sql)
+* [Aldjemy](https://github.com/Deepwalker/aldjemy/) (query sql for sqlalchemy in like django orm)
+* [Pytest](http://pytest.org/latest/) (write test in django)
+* [Pytest-django](https://pytest-django.readthedocs.org/en/latest/) (write test in django)
 
 ## Installation
 
