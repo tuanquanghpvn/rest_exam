@@ -3,10 +3,11 @@
 How to write framework with Django
 
 ## Technology
-* [SQlAlchemy](http://www.sqlalchemy.org/)
-* [Aldjemy](https://github.com/Deepwalker/aldjemy/)
+* [Django](https://www.djangoproject.com/)
 * [Django Rest Framework](http://www.django-rest-framework.org/)
 * [Marshmallow](http://marshmallow.rtfd.org)
+* [SQlAlchemy](http://www.sqlalchemy.org/)
+* [Aldjemy](https://github.com/Deepwalker/aldjemy/)
 * [Pytest](http://pytest.org/latest/)
 * [Pytest-django](https://pytest-django.readthedocs.org/en/latest/)
 
