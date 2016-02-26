@@ -1,7 +1,5 @@
 # RESTful with Django
 
-How to write framework with Django
-
 ## Technology
 * [Django](https://www.djangoproject.com/)
 * [Django Rest Framework](http://www.django-rest-framework.org/)
@@ -18,9 +16,38 @@ How to write framework with Django
 3. Run project: python manage.py runserver [port].
 4. Create request and check data or status return.
 
+## Model
+
+Category
++ id: int (identity)
++ name: string (required)
++ slug: string (required)
+
+Story
++ id: int (identity)
++ name: string (required)
++ slug: string (required)
++ description: string (optional)
++ content: string (required)
++ category_id: int (required)
+
 ## Usage
 
-TODO: Write usage instructions
+You can send request with get, put, post, delete with url and receive data, status from server
+
+Category
++ Get list: http://[domain:port]/category/
++ Post: http://[domain:port]/category/
++ Put: http://[domain:port]/category/
++ Get detail: http://[domain:port]/category/[id]/
++ Delete: http://[domain:port]/category/[id]/
+
+Story
++ Get list: http://[domain:port]/story/
++ Post: http://[domain:port]/story/
++ Put: http://[domain:port]/story/
++ Get detail: http://[domain:port]/story/[id]/
++ Delete: http://[domain:port]/story/[id]/
 
 ## Contributing
 
