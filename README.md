@@ -60,4 +60,4 @@ Story
 
 ## License
 
-MIT licensed. See the bundled [LICENSE](https://github.com/tuanquanghpvn/restfull-exam/LICENSE) file for more details.
+MIT licensed. See the bundled [LICENSE](https://github.com/tuanquanghpvn/restful-exam/blob/master/LICENSE) file for more details.
